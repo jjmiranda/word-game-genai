@@ -1,0 +1,9 @@
+# Libraries for working with vector databases
+# tiktoken
+# datalake
+
+flask
+langchain
+python-dotenv
+jupyter
+openai
