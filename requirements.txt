@@ -5,5 +5,4 @@
 flask
 langchain
 python-dotenv
-jupyter
 openai
