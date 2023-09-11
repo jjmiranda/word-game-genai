@@ -1,14 +1,19 @@
-# Smart Research / Code Reverse Documentation
+# Word Game with GenAI - by JJ
 
 ## Prerequisites
 
 This project requires Python to be installed and available on the system's PATH.
 
+This version use Azure OpenAI and needs this environments variables:
+* OPENAI_AZURE=True
+* OPENAI_API_KEY_AZURE=your_api_key_here
+* PORT=8000 # if you run the App using python app.py
+
 ## Setup Environment
 
-1. Go to the proyect folder and create a virtual environment named `gpt`:
+1. Go to the proyect folder and create a virtual environment named `venv-wordgame`:
    ```bash
-   python -m venv gpt
+   python -m venv venv-wordgame
    ```
 
 Note: Unless we want to install the venv in another folder, if we want to change its name we will need to modify the `.gitignore`.
@@ -16,11 +21,11 @@ Note: Unless we want to install the venv in another folder, if we want to change
 2. Activate the virtual environment on the proyect folder:
    - On Windows:
      ```bash
-     gpt\Scripts\activate
+     venv-wordgame\Scripts\activate
      ```
    - On macOS and Linux:
      ```bash
-     source gpt/bin/activate
+     source venv-wordgame/bin/activate
      ```
 
 3. Install the required packages from the `requirements.txt` file:
@@ -33,18 +38,16 @@ Note: Unless we want to install the venv in another folder, if we want to change
 1. Activate the virtual environment on the proyect folder:
    - On Windows:
      ```bash
-     gpt\Scripts\activate
+     venv-wordgame\Scripts\activate
      ```
    - On macOS and Linux:
      ```bash
-     source gpt/bin/activate
+     source venv-wordgame/bin/activate
      ```
 
-2. Launch Jupyter Notebook:
+2. Launch Flask App:
    ```bash
-   jupyter notebook
+   flask run --port 8000
    ```
 
-3. In the Jupyter Notebook interface, select the notebook named "v4 Fixed Outline Research and Code Documentation.ipynb" to begin your work.
-
-4. Executes the cells, the final result should be located on REPOSITORY/build.
+3. Access to the APP fron your web browser using port 8000 
