@@ -50,7 +50,7 @@ def process():
   Un jugador te pasará una palabra y una lista de palabras.
   En una estructura JSON, en la llave 'nueva_palabra', asegurate de generar una palabra que NO esté en la lista de palabras que el jugador te pase,
   NO uses la palabra que te ha pasado el jugador y asegúrate que la lista con la nueva palabra que has generado no tenga ninguna palabra repetida.
-  En la llave 'respuesta', tienes que responder con Si, si la palabra que te pasó el jugador entra dentro de la categoría: {category} y con No, si no entra en la categoría.
+  En la llave 'respuesta', tienes que responder con S, si la palabra que te pasó el jugador entra dentro de la categoría: {category} y con N, si no entra en la categoría.
   También agrega a tu respuesta, en la llave 'porcentaje', el porcentaje que crees que la palabra que te pasó el jugador calza con la categoría: {category}."""
   system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
   human_template = "Palabra:{word}. Lista de palabras:{list}"

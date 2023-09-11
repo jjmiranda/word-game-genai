@@ -81,7 +81,7 @@
                         data_json = JSON.parse(data[0]);
                         console.log(data_json);
                         document.getElementById("word-ai").innerHTML = data_json.nueva_palabra;
-                        if(data_json.respuesta=='Si'){
+                        if(data_json.respuesta=='S'){
                             if(listado.indexOf(word) !== -1){  
                                     document.getElementById("calificaID").innerHTML = 'Esa palabra ya está repetida!';
                                     listado.push(data_json.nueva_palabra.toLowerCase());
