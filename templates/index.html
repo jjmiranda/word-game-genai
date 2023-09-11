@@ -3,10 +3,12 @@
     <head>
         <title>Word Game DTI Lab</title>
         <style>
+            .word-ai {
+                color: red;
+            }
             .blink {
                 animation: blinker 1.5s linear infinite;
                 color: red;
-                font-family: sans-serif;
             }
             @keyframes blinker {
                 50% {
@@ -24,6 +26,7 @@
             <fieldset>
                 <legend>Juego de palabras con GenAI - Compite conmigo, la computadora</legend>
                 <h2 class="word-ai" id="word-ai">-Palabra de la compu-</h2>
+                <h3 class="count" id="count">Cantidad de palabras: <span class="count-number" id="count-number">0</span></h3>
                 <p>Categoria del juego</p>
                 <div class="item">
                     <label for="fcat"> Define la categoría<span>*</span></label>
@@ -93,6 +96,7 @@
                             listado.push(data_json.nueva_palabra.toLowerCase());
                         }
                         console.log(listado);
+                        document.getElementById("count-number").innerHTML = listado.length;
                         document.getElementById("fword").select();
                     });
             }
