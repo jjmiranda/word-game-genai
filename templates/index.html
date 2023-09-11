@@ -1,1 +1,101 @@
-Hola mundo sin ningún HTML de por medio!
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Word Game DTI Lab</title>
+        <style>
+            .blink {
+                animation: blinker 1.5s linear infinite;
+                color: red;
+                font-family: sans-serif;
+            }
+            @keyframes blinker {
+                50% {
+                    opacity: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <form onsubmit="return false">
+            <div class="banner">
+                <h1>El juego de palabras del Showroom del DTI LAB</h1>
+            </div>
+            <br/>
+            <fieldset>
+                <legend>Juego de palabras con GenAI - Compite conmigo, la computadora</legend>
+                <h2 class="word-ai" id="word-ai">-Palabra de la compu-</h2>
+                <p>Categoria del juego</p>
+                <div class="item">
+                    <label for="fcat"> Define la categoría<span>*</span></label>
+                    <input id="fcat" type="text" name="fcat" size="80"/><button type="button" id="reseteaBtnID" onclick="resetea()">Resetear juego</button>
+                </div>
+                <p>Ingresa tu palabra</p>
+                <div class="item">
+                    <label for="fword"> Palabra del humano<span>*</span></label>
+                    <input id="fword" type="text" name="fword" onkeypress="keypressEvent(event)"/><span id="calificaID"></span>
+                </div>
+                <div>
+                    <button type="button" onclick="processWord()">Enviar palabra</button>
+                </div>
+            </fieldset>
+        </form>
+        <script>
+            document.getElementById("reseteaBtnID").style.visibility="hidden";
+            var listado = [];
+
+            function resetea(){
+                window.location.reload();
+            }
+
+            function keypressEvent(event){
+                if('charCode' in event){
+                    if(event.charCode==13){
+                        processWord();
+                        return false;
+                    }
+                }
+                else{
+                    if(event.keyCode==13){
+                        processWord();
+                        return false;
+                    }
+                }
+            }
+
+            function processWord(){
+                var cat = document.getElementById("fcat").value;
+                if(cat=="") return false;
+                document.getElementById("fcat").setAttribute("disabled","true");
+                document.getElementById("reseteaBtnID").style.visibility="visible";
+                var word = document.getElementById("fword").value;
+                if(word=="") return false;
+                document.getElementById("word-ai").innerHTML = '<p class="blink"> ...Pensando...</p>'
+                document.getElementById("calificaID").innerHTML = '';
+                fetch('/process?cat='+cat+'&word='+word+'&listado='+listado)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        data_json = JSON.parse(data[0]);
+                        console.log(data_json);
+                        document.getElementById("word-ai").innerHTML = data_json.nueva_palabra;
+                        if(data_json.respuesta=='Si'){
+                            if(listado.indexOf(word) !== -1){  
+                                    document.getElementById("calificaID").innerHTML = 'Esa palabra ya está repetida!';
+                                    listado.push(data_json.nueva_palabra.toLowerCase());
+                            }   
+                            else{  
+                                document.getElementById("calificaID").innerHTML = '¡Muy bien, continua!';
+                                listado.push(word.toLowerCase(),data_json.nueva_palabra.toLowerCase());
+                            }  
+                        }
+                        else{
+                            document.getElementById("calificaID").innerHTML = '¡Noooo, esa palabra no funciona!';
+                            listado.push(data_json.nueva_palabra.toLowerCase());
+                        }
+                        console.log(listado);
+                        document.getElementById("fword").select();
+                    });
+            }
+        </script>
+    </body>
+</html>
